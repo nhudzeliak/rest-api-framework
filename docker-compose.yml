@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+
+    postgres:
+        image: postgres:14.1-alpine
+        restart: always
+        environment:
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=postgres
+        ports:
+            - '15432:5432'
+        volumes:
+            - ./db/migrations/_init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+    migrations:
+        container_name: rest-api-framework-migrations
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        links:
+            - "postgres:database"
+        depends_on:
+            - postgres
+        command:
+            - '/rest-api-framework/bin/scripts/migrate'
+
+    api:
+        container_name: rest-api-framework-api
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        links:
+            - "postgres:database"
+        depends_on:
+            - postgres
+            - migrations
+        ports:
+            - 8080:8080
+
+volumes:
+    db:
+        driver: local

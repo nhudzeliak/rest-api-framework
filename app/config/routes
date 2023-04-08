@@ -1,0 +1,5 @@
+GET         /posts          PostsController.IndexPosts
+GET         /posts/{id}     PostsController.FindPost
+PUT         /posts/{id}     PostsController.UpdatePost
+POST        /posts          PostsController.CreatePost
+DELETE      /posts/{id}     PostsController.DeletePost
