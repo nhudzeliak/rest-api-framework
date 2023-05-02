@@ -3,19 +3,16 @@ package entities
 import (
 	"time"
 
-	userentities "github.com/nataliia_hudzeliak/rest-api-framework/app/services/users/entities"
-
 	"github.com/pkg/errors"
 )
 
 // Post represents a newsletter post.
 type Post struct {
-	ID        PostID              `json:"id" gorm:"column:id; primary_key:yes"`
-	UserID    userentities.UserID `json:"user_id" gorm:"column:user_id"`
-	Title     string              `json:"title" gorm:"column:title"`
-	Content   string              `json:"content" gorm:"column:content"`
-	UpdatedAt time.Time           `json:"updated_at" gorm:"column:updated_at"`
-	CreatedAt time.Time           `json:"created_at" gorm:"column:created_at"`
+	ID        PostID    `json:"id" gorm:"column:id; primary_key:yes"`
+	Title     string    `json:"title" gorm:"column:title"`
+	Content   string    `json:"content" gorm:"column:content"`
+	UpdatedAt time.Time `json:"updated_at" gorm:"column:updated_at"`
+	CreatedAt time.Time `json:"created_at" gorm:"column:created_at"`
 }
 
 // TableName ...
