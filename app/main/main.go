@@ -30,6 +30,7 @@ func main() {
 		port, _ = strconv.Atoi(cfg["self.port"])
 	}
 	if p := os.Getenv("PORT"); p != "" {
+		logrus.Infof("override env port: %v", p)
 		port, _ = strconv.Atoi(p)
 	}
 	logrus.Infof("starting the app at %v:%v", host, port)
