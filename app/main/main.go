@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"os"
 	"strconv"
 
 	"github.com/nataliia_hudzeliak/rest-api-framework/app/config"
@@ -27,6 +28,9 @@ func main() {
 	}
 	if port == 0 {
 		port, _ = strconv.Atoi(cfg["self.port"])
+	}
+	if p := os.Getenv("PORT"); p != "" {
+		port, _ = strconv.Atoi(p)
 	}
 	logrus.Infof("starting the app at %v:%v", host, port)
 
